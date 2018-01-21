@@ -443,6 +443,20 @@
                 }
             },
             params: {}
+        }).state("platform", {
+            url: "/platform",
+            parent: 'app',
+            data: {
+                authorities: []
+            },
+            views: {
+                'content@': {
+                    templateUrl: "app/platform/platform.html",
+                    controller: "PlatformController",
+                    controllerAs: 'vm'
+                }
+            },
+            params: {}
         });
     }
 })();

@@ -1,0 +1,50 @@
+{
+  "LR" :  {
+         "name" : "LR",
+         "class" : "compontent.model.classification.LogisticRegressionC",
+         "description" : "LogisticRegression",
+         "version" : "1.0",
+         "created_time" : "2016.9.30",
+         "owner" : "machao",
+         "parameters" : {
+           "学习速率": {
+             "type": "double",
+             "val": "0.02"
+           },
+           "抵达次数" : {
+             "type": "double",
+             "val": "0.02"
+           },
+           "深度" : {
+             "type": "double",
+             "val": "0.02"
+           }
+         }
+                        ,
+         "input" : {"data" : true},
+         "output" : {"model" : true}
+        },
+
+    "Data" : {
+      "name": "Data",
+      "class": "compontent.data.HDFSData",
+      "description": "read hdfs data",
+      "version": "1.0",
+      "created_time": "2016.9.30",
+      "owner": "machao",
+      "parameters": {
+        "dataFormat": {
+          "type": "string",
+          "val": ""
+        },
+        "path": {
+          "type": "string",
+          "val": "0.02"
+        }
+      },
+      "input" : {"data" : true},
+      "output" : {"data" : true}
+
+    }
+
+}
