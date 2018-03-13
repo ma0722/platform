@@ -26,9 +26,13 @@ public class MysqlData extends Component {
         reader.option("driver","com.mysql.jdbc.Driver");
         reader.option("user", username);
         reader.option("password", password);
-
         Dataset<Row> dataset = reader.load();
-        outputs.get("data").setDataset(dataset);
+        for (String v : dataset.columns())
+            System.out.println(v);
+        dataset.show(10);
+        dataset.collect();
+        if(outputs.containsKey("vectors"))
+            outputs.get("data").setDataset(dataset);
     }
 
     public void setParameters(JSONObject parameters) throws JSONException {

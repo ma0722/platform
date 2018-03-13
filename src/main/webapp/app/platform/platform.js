@@ -5,6 +5,7 @@ angular
 PlatformController.$inject = ['$scope', '$http', '$state'];
 
 function PlatformController($scope, $http, $state) {
+    fontColor = "0.0.0";
     var canvas = document.getElementById('canvas');
     var stage = new JTopo.Stage(canvas);
     showJTopoToobar(stage);
@@ -13,10 +14,12 @@ function PlatformController($scope, $http, $state) {
 
     text = "点击节点可连线(连个节点)";
     var msgNode = new JTopo.TextNode(text);
+    msgNode.fontColor = fontColor;
     msgNode.dragable = false;
     msgNode.selected = false;
     msgNode.zIndex++;
     msgNode.setBound(25, 25);
+
     scene.add(msgNode);
 
     var beginNode = null;
@@ -86,6 +89,9 @@ function PlatformController($scope, $http, $state) {
                     name = value + '_' + component_count[value];
                     fill_table(name, componentData[value]);
                     var node = new JTopo.Node(name);
+                    node.setImage("./img/component.png");
+                    node.setSize(40, 40);
+                    node.fontColor = fontColor;
                     component_count[value] += 1;
                     node.addEventListener('mouseup', function (event) {
                         currentNode = this;
