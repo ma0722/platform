@@ -5,6 +5,7 @@ import org.apache.spark.sql.Dataset;
 import org.json.JSONException;
 import org.json.JSONObject;
 import io.github.jhipster.sample.web.rest.platform.util.SparkUtil;
+import org.junit.Test;
 
 
 public class HDFSData extends Component {
@@ -14,7 +15,9 @@ public class HDFSData extends Component {
 
     public void run() throws  Exception {
         Dataset dataset = SparkUtil.readFromHDFS(path, dataFormat);
-        outputs.get("data").setDataset(dataset);
+        dataset.show();
+        if(outputs.containsKey("data"))
+            outputs.get("data").setDataset(dataset);
     }
 
     public void setParameters(JSONObject parameters) throws JSONException {
@@ -24,4 +27,10 @@ public class HDFSData extends Component {
             this.path = parameters.getJSONObject("path").getString("value");
     }
 
+    @Test
+    public void test() throws Exception{
+        this.path = "/data/weibo.csv";
+        this.dataFormat = "csv";
+        run();
+    }
 }

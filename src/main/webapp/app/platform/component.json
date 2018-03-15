@@ -208,7 +208,7 @@
 
 
     "Bag-of-Words" :  {
-        "name" : "io.github.jhipster.sample.web.rest.platform.compontent.model.transformer.Bag-of-Words",
+        "name" : "io.github.jhipster.sample.web.rest.platform.compontent.feature.transformer.BagofWords",
         "class" : "compontent.model.transformer.Ngram",
         "description" : "N-gram算法，计算N-gram特征",
         "version" : "1.0",

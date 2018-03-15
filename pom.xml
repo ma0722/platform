@@ -56,9 +56,9 @@
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
         <prometheus-simpleclient.version>0.0.20</prometheus-simpleclient.version>
         <run.addResources>false</run.addResources>
-        <scala-maven-plugin.version>3.2.2</scala-maven-plugin.version>
-        <scala.version>2.11.8</scala.version>
-        <sonar-maven-plugin.version>3.2</sonar-maven-plugin.version>
+        <!--<scala-maven-plugin.version>3.2.2</scala-maven-plugin.version>-->
+        <!--<scala.version>2.11.8</scala.version>-->
+        <!--<sonar-maven-plugin.version>3.2</sonar-maven-plugin.version>-->
 
         <sonar.exclusions>src/main/webapp/content/**/*.*, src/main/webapp/bower_components/**/*.*, src/main/webapp/i18n/*.js, target/www/**/*.*</sonar.exclusions>
 
@@ -98,9 +98,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
             <groupId>org.ansj</groupId>
             <artifactId>ansj_seg</artifactId>
-            <version>5.0.2</version>
+            <version>5.1.6</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -299,11 +304,11 @@
             <version>${mapstruct.version}</version>
         </dependency>
         <!-- scala-library -->
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>${scala.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.scala-lang</groupId>-->
+            <!--<artifactId>scala-library</artifactId>-->
+            <!--<version>${scala.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
@@ -431,6 +436,7 @@
 
 
 
+
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-mllib_2.11</artifactId>
@@ -457,7 +463,11 @@
             <version>2.0.0</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.databricks</groupId>
+            <artifactId>spark-avro_2.11</artifactId>
+            <version>4.0.0</version>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>org.mongodb</groupId>-->
             <!--<artifactId>mongo-java-driver</artifactId>-->
@@ -970,34 +980,34 @@
             <id>cc</id>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>net.alchim31.maven</groupId>
-                        <artifactId>scala-maven-plugin</artifactId>
-                        <version>${scala-maven-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>compile</id>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>add-source</goal>
-                                    <goal>compile</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>test-compile</id>
-                                <phase>test-compile</phase>
-                                <goals>
-                                    <goal>add-source</goal>
-                                    <goal>testCompile</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <recompileMode>incremental</recompileMode>
-                            <verbose>true</verbose>
-                            <scalaVersion>${scala.version}</scalaVersion>
-                        </configuration>
-                    </plugin>
+                    <!--<plugin>-->
+                        <!--<groupId>net.alchim31.maven</groupId>-->
+                        <!--<artifactId>scala-maven-plugin</artifactId>-->
+                        <!--<version>${scala-maven-plugin.version}</version>-->
+                        <!--<executions>-->
+                            <!--<execution>-->
+                                <!--<id>compile</id>-->
+                                <!--<phase>compile</phase>-->
+                                <!--<goals>-->
+                                    <!--<goal>add-source</goal>-->
+                                    <!--<goal>compile</goal>-->
+                                <!--</goals>-->
+                            <!--</execution>-->
+                            <!--<execution>-->
+                                <!--<id>test-compile</id>-->
+                                <!--<phase>test-compile</phase>-->
+                                <!--<goals>-->
+                                    <!--<goal>add-source</goal>-->
+                                    <!--<goal>testCompile</goal>-->
+                                <!--</goals>-->
+                            <!--</execution>-->
+                        <!--</executions>-->
+                        <!--<configuration>-->
+                            <!--<recompileMode>incremental</recompileMode>-->
+                            <!--<verbose>true</verbose>-->
+                            <!--<scalaVersion>${scala.version}</scalaVersion>-->
+                        <!--</configuration>-->
+                    <!--</plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>

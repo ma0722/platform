@@ -1,12 +1,15 @@
 package io.github.jhipster.sample.web.rest.platform.compontent.data;
 
 import io.github.jhipster.sample.web.rest.platform.compontent.Component;
+import org.apache.spark.SparkConf;
 import org.apache.spark.sql.DataFrameReader;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 import org.json.JSONException;
 import org.json.JSONObject;
 import io.github.jhipster.sample.web.rest.platform.util.SparkUtil;
+import org.junit.Test;
 
 
 public class MysqlData extends Component {
@@ -19,7 +22,15 @@ public class MysqlData extends Component {
     private String sql;
 
     public void run() throws  Exception {
+
+//        local spark can run
+//        SparkConf conf = new SparkConf().setAppName("data-platform").setMaster("local");
+//        SparkSession spark = SparkSession.builder().config(conf).getOrCreate();
+//        DataFrameReader reader = spark.read().format("jdbc") ;
+
+
         DataFrameReader reader = SparkUtil.spark.read().format("jdbc");
+
         String url = String.format("jdbc:mysql://%s:%d/%s", ip, port, database);
         reader.option("url",url);
         reader.option("dbtable", sql);
@@ -27,9 +38,9 @@ public class MysqlData extends Component {
         reader.option("user", username);
         reader.option("password", password);
         Dataset<Row> dataset = reader.load();
-        for (String v : dataset.columns())
-            System.out.println(v);
-        dataset.show(10);
+//        for (String v : dataset.columns())
+//            System.out.println(v);
+        dataset.show();
         dataset.collect();
         if(outputs.containsKey("vectors"))
             outputs.get("data").setDataset(dataset);
@@ -50,4 +61,22 @@ public class MysqlData extends Component {
             this.sql = parameters.getJSONObject("sql").getString("value");
     }
 
+
+    @Test
+    public void test() throws Exception{
+//        this.ip = "localhost";
+//        this.username = "root";
+//        this.password = "ma0722";
+//        this.database = "bridge";
+//        this.port = 3306;
+//        this.sql = "(SELECT rawdata_id, created_at, updated_at from rawdata) as tmp";
+
+        this.ip = "10.109.247.63";
+        this.username = "root";
+        this.password = "hadoop";
+        this.database = "db_weibo";
+        this.port = 3306;
+        this.sql = "(SELECT weibo_content, weibo_author from weibo_original limit 30) as tmp";
+        run();
+    }
 }

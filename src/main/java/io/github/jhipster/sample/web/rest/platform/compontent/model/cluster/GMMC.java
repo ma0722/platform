@@ -1,11 +1,13 @@
 package io.github.jhipster.sample.web.rest.platform.compontent.model.cluster;
 
 import io.github.jhipster.sample.web.rest.platform.compontent.Component;
+import io.github.jhipster.sample.web.rest.platform.util.SparkUtil;
 import org.apache.spark.ml.clustering.GaussianMixture;
 import org.apache.spark.ml.clustering.GaussianMixtureModel;
 import org.apache.spark.sql.Dataset;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Test;
 
 import java.io.IOException;
 
@@ -44,5 +46,14 @@ public class GMMC extends Component {
         model_.save(path);
     }
 
-
+    @Test
+    public void test() throws Exception{
+        Dataset dataset =  SparkUtil.readFromHDFS("/data/sample_cluster_data.txt", "libsvm");
+        model_ = model.fit(dataset);
+        this.path = "/mode/GMM";
+        if(path != null && !path.equals("")){
+            save();
+            System.out.println("model saved success on " + this.path);
+        }
+    }
 }

@@ -1,14 +1,22 @@
 package io.github.jhipster.sample.web.rest.platform.compontent.feature.extractor;
 
 import io.github.jhipster.sample.web.rest.platform.compontent.Component;
+import org.ansj.domain.Result;
+import org.ansj.domain.Term;
+import org.ansj.splitWord.analysis.ToAnalysis;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.function.MapFunction;
+import org.apache.spark.ml.feature.CountVectorizer;
 import org.apache.spark.ml.feature.CountVectorizerModel;
-import org.apache.spark.sql.Dataset;
+import org.apache.spark.ml.feature.Tokenizer;
+import org.apache.spark.sql.*;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Test;
 
 public class CounterVector extends Component{
 
-
+    private Tokenizer tokenizer = new Tokenizer();
     private CountVectorizerModel model;
     private String[] vocabulary;
 
